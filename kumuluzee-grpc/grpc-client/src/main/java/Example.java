@@ -14,8 +14,13 @@ public class Example {
     @Inject
     UserServiceClient userClient;
 
-    public void init(@Observes @Initialized(ApplicationScoped.class) Object o){
+    public void init(@Observes @Initialized(ApplicationScoped.class) Object o) {
         logger.info("Example initialized");
         userClient.getUser(1);
+//        userClient.getUsersServerStreaming();
+//        userClient.getUsersClientStreaming();
+//        userClient.getUsersBidirectionalStreaming();
+//        userClient.getUsersBidirectionalStreamingCancellation();
+//        userClient.checkHealth("");
     }
 }

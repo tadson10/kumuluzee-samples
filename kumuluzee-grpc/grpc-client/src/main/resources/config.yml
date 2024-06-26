@@ -8,3 +8,5 @@ kumuluzee:
     - name: client1
       port: 8081
       address: localhost
+      keepAlive: 1000
+      keepAliveTimeout: 1000

@@ -1,8 +1,14 @@
 syntax = "proto3";
 option java_package = "grpc";
 
+import "google/protobuf/empty.proto";
+
 service User {
     rpc getUser(UserRequest) returns (UserResponse) {};
+    rpc getUsersServerStreaming(google.protobuf.Empty) returns (stream UserResponse) {};
+    rpc getUsersClientStreaming(stream UserRequest) returns (UserList) {};
+    rpc getUsersBidirectionalStreaming(stream UserRequest) returns (stream UserResponse) {};
+    rpc getUsersBidirectionalStreamingCancellation(stream UserRequest) returns (stream UserResponse) {};
 }
 
 message UserRequest {
@@ -13,4 +19,8 @@ message UserResponse {
     int32 id = 1;
     string name = 2;
     string surname = 3;
+}
+
+message UserList {
+    repeated UserResponse users = 1;
 }
