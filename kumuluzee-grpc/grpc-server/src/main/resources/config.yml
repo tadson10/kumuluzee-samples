@@ -10,6 +10,13 @@ kumuluzee:
       password: postgres
   grpc:
     server:
+#      https:
+#        enable: true
+#        port: 8443
+#        certFile: ../certs/server.crt
+#        keyFile: ../certs/server.key
+#        chainFile: ../certs/server.crt
+#        mutualTLS: require
       conf:
 #        permitKeepAliveTime: 60000
 #        permitKeepAliveWithoutCalls: 10000
