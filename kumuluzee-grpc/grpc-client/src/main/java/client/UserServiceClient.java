@@ -104,9 +104,9 @@ public class UserServiceClient {
 
   public void getUsersClientStreaming() {
     StreamObserver<UserService.UserRequest> requestStreamObserver =
-        stub.getUsersClientStreaming(new StreamObserver<UserService.UserList>() {
+        stub.getUsersClientStreaming(new StreamObserver<UserService.UserListResponse>() {
           @Override
-          public void onNext(UserService.UserList userListResponse) {
+          public void onNext(UserService.UserListResponse userListResponse) {
             logger.info("onNext: " + userListResponse.getUsersCount());
             for (UserService.UserResponse user : userListResponse.getUsersList()) {
               System.out.println("User ID: " + user.getId() + ", Name: " + user.getName());
@@ -170,47 +170,4 @@ public class UserServiceClient {
     requestStreamObserver.onCompleted();
 
   }
-
-  public void getUsersBidirectionalStreamingCancellation() {
-    ClientCallStreamObserver<UserService.UserRequest> requestStreamObserver =
-        (ClientCallStreamObserver<UserService.UserRequest>) stub.withCompression("gzip")
-//            .withDeadlineAfter(10, TimeUnit.SECONDS)
-            .getUsersBidirectionalStreamingCancellation(new StreamObserver<UserService.UserResponse>() {
-              @Override
-              public void onNext(UserService.UserResponse userResponse) {
-                logger.info("onNext: " + userResponse.getName() + " " + userResponse.getSurname());
-              }
-
-              @Override
-              public void onError(Throwable throwable) {
-                logger.warning("Error retrieving user");
-                throwable.printStackTrace();
-              }
-
-              @Override
-              public void onCompleted() {
-                logger.info("Completed");
-              }
-            });
-
-    logger.info("Sending requests");
-
-    IntStream.range(1, 5).mapToObj(n -> UserService.UserRequest
-            .newBuilder()
-            .setId(n)
-            .build())
-        .forEach(id -> {
-              logger.info("Sending request: " + id.getId());
-              if (id.getId() == 3) {
-                requestStreamObserver.cancel("Call cancelled", new StatusRuntimeException(io.grpc.Status.CANCELLED));
-                requestStreamObserver.onError(new StatusRuntimeException(io.grpc.Status.CANCELLED));
-              }
-              requestStreamObserver.onNext(id);
-            }
-        );
-
-    requestStreamObserver.onCompleted();
-
-  }
-
 }

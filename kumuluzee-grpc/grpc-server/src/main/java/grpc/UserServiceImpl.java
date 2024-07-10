@@ -89,7 +89,7 @@ public class UserServiceImpl extends UserGrpc.UserImplBase {
 
   @PermitAll
   @Override
-  public StreamObserver<UserService.UserRequest> getUsersClientStreaming(StreamObserver<UserService.UserList> responseObserver) {
+  public StreamObserver<UserService.UserRequest> getUsersClientStreaming(StreamObserver<UserService.UserListResponse> responseObserver) {
     return new StreamObserver<UserService.UserRequest>() {
       List<UserService.UserResponse> users = new ArrayList<>();
       Integer count = 0;
@@ -124,7 +124,7 @@ public class UserServiceImpl extends UserGrpc.UserImplBase {
       public void onCompleted() {
         logger.warning("onCompleted: " + users.size());
 
-        responseObserver.onNext(UserService.UserList
+        responseObserver.onNext(UserService.UserListResponse
             .newBuilder()
             .addAllUsers(users)
             .build());
@@ -170,62 +170,6 @@ public class UserServiceImpl extends UserGrpc.UserImplBase {
       public void onCompleted() {
         logger.warning("onCompleted: " + users.size());
         responseObserver.onCompleted();
-      }
-    };
-  }
-
-  @DenyAll
-  @Override
-  public StreamObserver<UserService.UserRequest> getUsersBidirectionalStreamingCancellation(StreamObserver<UserService.UserResponse> responseObserver) {
-
-    Context context = Context.current();
-    return new StreamObserver<UserService.UserRequest>() {
-      List<User> users = new ArrayList<>();
-      Integer count = 0;
-
-      @Override
-      public void onNext(UserService.UserRequest userRequest) {
-        userBean = CDI.current().select(UserBean.class).get();
-        User user = userBean.getUser(userRequest.getId());
-
-        if (user != null) {
-          logger.warning("onNext: " + user.getName());
-          count++;
-          users.add(user);
-          UserService.UserResponse response = UserService.UserResponse
-              .newBuilder()
-              .setId(user.getId())
-              .setName(user.getName())
-              .setSurname(user.getSurname())
-              .build();
-
-          // Check if the client has canceled the call
-          if (context.isCancelled()) {
-            System.out.println("Client has canceled the call");
-            responseObserver.onCompleted();
-          }
-
-          responseObserver.onNext(response);
-
-        }
-      }
-
-      @Override
-      public void onError(Throwable throwable) {
-        logger.warning("Error retrieving user");
-        throwable.printStackTrace();
-      }
-
-      @Override
-      public void onCompleted() {
-        logger.warning("onCompleted: " + users.size());
-
-        if (!context.isCancelled()) {
-          System.out.println("Client completed the call");
-          responseObserver.onCompleted();
-        } else {
-          System.out.println("Client has canceled the call");
-        }
       }
     };
   }

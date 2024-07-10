@@ -15,7 +15,7 @@ kumuluzee:
 #        port: 8443
 #        certFile: ../certs/server.crt
 #        keyFile: ../certs/server.key
-#        chainFile: ../certs/server.crt
+#        chainFile: ../certs/rootCA.crt
 #        mutualTLS: require
       conf:
 #        permitKeepAliveTime: 60000
@@ -47,4 +47,4 @@ kumuluzee:
 
 #        keycloak-jwks-uri: http://localhost:8090/realms/master/protocol/openid-connect/certs
 #        issuer: http://localhost:8090/realms/master
-#        resource-name: account
+#        resource-name: user-grpc
