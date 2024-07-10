@@ -23,7 +23,8 @@ import java.util.logging.Logger;
 @GrpcService(interceptors = {
         @GrpcInterceptor(name = "grpc.interceptors.HeaderInterceptor2"),
         @GrpcInterceptor(name = "grpc.interceptors.HeaderInterceptor")},
-        secured = true)
+        secured = true,
+        resourceName = "user-grpc")
 public class UserServiceImpl extends UserGrpc.UserImplBase {
 
   private static final Logger logger = Logger.getLogger(UserServiceImpl.class.getName());
