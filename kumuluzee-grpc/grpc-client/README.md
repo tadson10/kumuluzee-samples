@@ -83,6 +83,12 @@ and `kumuluzee-grpc` dependency to the sample:
         <version>1.0-SNAPSHOT</version>
     </dependency>
 
+    <dependency>
+        <groupId>io.grpc</groupId>
+        <artifactId>grpc-services</artifactId>
+        <version>${grpc.version}</version>
+    </dependency>
+
 </dependencies>
 ```
 
@@ -148,8 +154,13 @@ in "proto" directory so the maven plugin can detect it and compile correspondent
 syntax = "proto3";
 option java_package = "client";
 
+import "google/protobuf/empty.proto";
+
 service User {
     rpc getUser(UserRequest) returns (UserResponse) {};
+    rpc getUsersServerStreaming(google.protobuf.Empty) returns (stream UserResponse) {};
+    rpc getUsersClientStreaming(stream UserRequest) returns (UserListResponse) {};
+    rpc getUsersBidirectionalStreaming(stream UserRequest) returns (stream UserResponse) {};
 }
 
 message UserRequest {
@@ -160,6 +171,10 @@ message UserResponse {
     int32 id = 1;
     string name = 2;
     string surname = 3;
+}
+
+message UserListResponse {
+    repeated UserResponse users = 1;
 }
 ```
 
@@ -251,6 +266,11 @@ kumuluzee:
     - name: client1
       port: 8443
       address: localhost
+      keepAlive: 1000
+      keepAliveTimeout: 1000
+      certFile: /path/to/cert/file
+      keyFile: /path/to/key/file
+      trustFile: /path/to/chain/file
 ```
 
 ### Build the microservice and run it

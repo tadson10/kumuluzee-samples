@@ -134,7 +134,7 @@ public class UserServiceImpl extends UserGrpc.UserImplBase {
     };
   }
 
-  @PermitAll
+  @DenyAll
   @Override
   public StreamObserver<UserService.UserRequest> getUsersBidirectionalStreaming(StreamObserver<UserService.UserResponse> responseObserver) {
     return new StreamObserver<UserService.UserRequest>() {

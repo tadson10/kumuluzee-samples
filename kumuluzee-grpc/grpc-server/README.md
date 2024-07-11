@@ -84,6 +84,11 @@ Add the `kumuluzee-core`, `kumuluzee-servlet-jetty`, `kumuluzee-cdi-weld`,
             <artifactId>postgresql</artifactId>
             <version>${postgres.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-services</artifactId>
+            <version>${grpc.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.kumuluz.ee.grpc</groupId>
@@ -156,8 +161,13 @@ in "proto" directory so the maven plugin can detect it and compile correspondent
 syntax = "proto3";
 option java_package = "grpc";
 
+import "google/protobuf/empty.proto";
+
 service User {
     rpc getUser(UserRequest) returns (UserResponse) {};
+    rpc getUsersServerStreaming(google.protobuf.Empty) returns (stream UserResponse) {};
+    rpc getUsersClientStreaming(stream UserRequest) returns (UserListResponse) {};
+    rpc getUsersBidirectionalStreaming(stream UserRequest) returns (stream UserResponse) {};
 }
 
 message UserRequest {
@@ -168,6 +178,10 @@ message UserResponse {
     int32 id = 1;
     string name = 2;
     string surname = 3;
+}
+
+message UserListResponse {
+    repeated UserResponse users = 1;
 }
 ```
 
@@ -301,13 +315,15 @@ Example:
 @GrpcService(interceptors = {
         @GrpcInterceptor(name = "grpc.interceptors.HeaderInterceptor2"),
         @GrpcInterceptor(name = "grpc.interceptors.HeaderInterceptor")},
-        secured = true)
+        secured = true,
+        resourceName = "user-grpc")
 public class UserServiceImpl extends UserGrpc.UserImplBase {
 
     private static final Logger logger = Logger.getLogger(UserServiceImpl.class.getName());
 
     private UserBean userBean;
 
+    @RolesAllowed({"Admin"})
     @Override
     public void getUser(UserService.UserRequest request, StreamObserver<UserService.UserResponse> responseObserver) {
 
@@ -326,6 +342,24 @@ public class UserServiceImpl extends UserGrpc.UserImplBase {
 
         responseObserver.onCompleted();
     }
+
+  @RolesAllowed({"Manager"})
+  @Override
+  public void getUsersServerStreaming(Empty request, StreamObserver<UserService.UserResponse> responseObserver) {
+      // CODE
+  }
+  
+  @PermitAll
+  @Override
+  public StreamObserver<UserService.UserRequest> getUsersClientStreaming(StreamObserver<UserService.UserListResponse> responseObserver) {
+        // CODE
+  }
+
+  @DenyAll
+  @Override
+  public StreamObserver<UserService.UserRequest> getUsersBidirectionalStreaming(StreamObserver<UserService.UserResponse> responseObserver) {
+        // CODE
+  }
 }
 ```
 
@@ -333,6 +367,11 @@ And annotate it with `@GrpcService` so KumuluzEE can automatically discover and 
 implementation to server. If using server interceptors they should be provided for 
 each service with their full class name inside `@GrpcService` annotation using `@GrpcInterceptor`.
 Each service can be additionally secured with JWT token with `secured` value set to true.
+If we are using secured service with Keycloak generated JWT, we need to provide `resourceName`. 
+Keycloak will add client roles in `resource_access` for each resource separately.
+
+When implementing secured service, we need to add `@RolesAllowed`, `@PermitAll` or `@DenyAll` annotations
+to each service method.
 
 **NOTE:** CDI injection currenty doesn't work inside service implementations. Lookup must
 be done manually using
@@ -358,11 +397,69 @@ kumuluzee:
     server:
       url: localhost
       http:
-        port: 8443
+        port: 8081
       auth:
         public-key: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDW6Angsf0Ry+GFD5HPstdcuaHJU5KhpT+gkzCCx7zZAbKRaEQexaTA9nPXK2Uzk2JqWTbZXSQYX2kBzYeiiedMpW6wvTaZWL9QhGjEnA9o97oNV1G5wQHKL/8FsvLXqt/81BCeZzWPDGvLNuU9l0qK3/xXL3efaZYPsZkB2AyZiQIDAQAB
         issuer: http://localhost
 ```
+The supplied public key can be in any of the following formats:
+- PKCS#8 PEM
+- JWK
+- JWKS
+- Base64 URL encoded JWK
+- Base64 URL encoded JWKS
+
+
+We can also use JWKS server to get public keys for JWT verification. In this case we need to provide JWKS server URL instead of public key.
+```yaml
+grpc:
+    server:
+        auth:
+            jwks-uri: http://localhost:8080/jwks
+            issuer: http://localhost
+```
+
+We can use even Keycloak server to get public keys for JWT verification. In this case we need to provide Keycloak server URL instead of public key.
+```yaml
+grpc:
+    server:
+        auth:
+            keycloak-jwks-uri: http://localhost:8090/realms/master/protocol/openid-connect/certs
+            issuer: http://localhost
+```
+
+All possible extensions are shown in the example below.
+```yaml
+kumuluzee:
+  name: "grpc-server"
+  grpc:
+    server:
+      base-url: http://localhost:8080
+      http:
+        port: 8081
+      https:
+        enable: true
+        port: 8443
+        certFile: /path/to/cert/file
+        keyFile: /path/to/key/file
+        chainFile: /path/to/chain/file
+        mutualTLS: optional
+      conf:
+        permitKeepAliveTime: 60000
+        permitKeepAliveWithoutCalls: 10000
+        keepAliveTimeout: 60000
+        keepAliveTime: 60000
+        maxConnectionIdle: 10000
+        maxConnectionAge: 20000
+        maxConnectionAgeGrace: 10000
+      health:
+        healthCheckEnabled: true        
+      auth:
+        maximum-leeway: 100        
+        public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnOTgnGBISzm3pKuG8QXMVm6eEuTZx8Wqc8D9gy7vArzyE5QC/bVJNFwlz...
+        issuer: http://localhost
+```
+
 
 ### Build the microservice and run it
 

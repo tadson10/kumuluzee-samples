@@ -19,12 +19,12 @@ kumuluzee:
 #        mutualTLS: require
       conf:
 #        permitKeepAliveTime: 60000
-#        permitKeepAliveWithoutCalls: 10000
+#        permitKeepAliveWithoutCalls: 60000
 #        keepAliveTimeout: 60000
 #        keepAliveTime: 60000
-#        maxConnectionIdle: 10000
-        maxConnectionAge: 20000
-#        maxConnectionAgeGrace: 10000
+#        maxConnectionIdle: 60000
+        maxConnectionAge: 60000
+#        maxConnectionAgeGrace: 60000
       health:
         healthCheckEnabled: true
       http:
