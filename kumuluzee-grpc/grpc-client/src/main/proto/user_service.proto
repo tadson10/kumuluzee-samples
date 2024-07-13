@@ -18,8 +18,19 @@ message UserResponse {
     int32 id = 1;
     string name = 2;
     string surname = 3;
+    oneof info {
+        string email = 4;
+        string phoneNumber = 5;
+    }
+    optional Sex sex = 6;
+    map<string, string> preferences = 7;
 }
 
 message UserListResponse {
     repeated UserResponse users = 1;
+}
+
+enum Sex {
+    MALE = 0;
+    FEMALE = 1;
 }

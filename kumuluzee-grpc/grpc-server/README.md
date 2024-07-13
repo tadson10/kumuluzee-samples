@@ -434,7 +434,6 @@ kumuluzee:
   name: "grpc-server"
   grpc:
     server:
-      base-url: http://localhost:8080
       http:
         port: 8081
       https:

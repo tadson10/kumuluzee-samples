@@ -48,6 +48,9 @@ public class UserServiceImpl extends UserGrpc.UserImplBase {
           .setId(user.getId())
           .setName(user.getName())
           .setSurname(user.getSurname())
+          .setPhoneNumber(user.getPhoneNumber())
+          .setSex(user.getSex() != null && user.getSex().equals("MALE") ? UserService.Sex.MALE : UserService.Sex.FEMALE)
+          .putPreferences("key1", "value1")
           .build();
 
       responseObserver.onNext(response);
