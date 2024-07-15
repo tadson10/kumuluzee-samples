@@ -10,6 +10,7 @@ kumuluzee:
       address: localhost
       keepAlive: 1000
       keepAliveTimeout: 1000
+      keepAliveWithoutCalls: true
 #      certFile: ../certs/client.crt
 #      keyFile: ../certs/client.key
 #      trustFile: ../certs/rootCA.crt
