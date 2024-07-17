@@ -268,6 +268,7 @@ kumuluzee:
       address: localhost
       keepAlive: 1000
       keepAliveTimeout: 1000
+      keepAliveWithoutCalls: true
       certFile: /path/to/cert/file
       keyFile: /path/to/key/file
       trustFile: /path/to/chain/file

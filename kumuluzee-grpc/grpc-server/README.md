@@ -445,7 +445,7 @@ kumuluzee:
         mutualTLS: optional
       conf:
         permitKeepAliveTime: 60000
-        permitKeepAliveWithoutCalls: 10000
+        permitKeepAliveWithoutCalls: true
         keepAliveTimeout: 60000
         keepAliveTime: 60000
         maxConnectionIdle: 10000
