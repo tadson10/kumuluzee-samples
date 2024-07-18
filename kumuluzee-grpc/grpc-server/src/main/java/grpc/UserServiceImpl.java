@@ -64,7 +64,6 @@ public class UserServiceImpl extends UserGrpc.UserImplBase {
   public void getUsersServerStreaming(Empty request, StreamObserver<UserService.UserResponse> responseObserver) {
     HealthStatusManager healthStatusManager = GrpcServer.getInstance().getHealthStatusManager();
     healthStatusManager.setStatus("User", HealthCheckResponse.ServingStatus.SERVING);
-    healthStatusManager.setStatus("Test", HealthCheckResponse.ServingStatus.NOT_SERVING);
 
     userBean = CDI.current().select(UserBean.class).get();
     List<User> users = userBean.getAllUsers();

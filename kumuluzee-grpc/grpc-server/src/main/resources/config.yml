@@ -27,6 +27,8 @@ kumuluzee:
 #        maxConnectionAgeGrace: 60000
       health:
         healthCheckEnabled: true
+      reflection:
+        reflectionEnabled: true
       http:
         port: 8081
       auth:
