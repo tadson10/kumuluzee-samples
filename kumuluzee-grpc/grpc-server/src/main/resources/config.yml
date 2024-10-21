@@ -33,18 +33,20 @@ kumuluzee:
         port: 8081
       auth:
         maximum-leeway: 100
-#        public-key: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArM5dnb8m8YJP7jE4+mzk
-#              m77bcPocec1ECgIRGsq15xMZDlVRngVVyAeU681k7wCvQaQManHKQPnD6Ky4LDoO
-#              5v9uc4nhdboPyW47LloRfUe17fjEZVbf/XXSIh65PNJXNTwbIbDSraRccUVCPG8b
-#              JO4Ed6NGlXJzfjH3L/W1tSrN2FE93hNnbc5lO0btz9Yefj0XRe6E2K0wj1wIy6YZ
-#              ExY6RQILsLiC2l/yad6fKScpiZ89VprcKZ59SYOkWasgXfUyayICgLxmkpmZUS3S
-#              V4NLFCVJKKw7azTZwYKUOeWrylfGv82sderKPhjvjPG8JAJqRj2b231f8/OS65Ti
-#              zwIDAQAB"
+        public-key: "-----BEGIN PUBLIC KEY-----
+                      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArM5dnb8m8YJP7jE4+mzk
+                      m77bcPocec1ECgIRGsq15xMZDlVRngVVyAeU681k7wCvQaQManHKQPnD6Ky4LDoO
+                      5v9uc4nhdboPyW47LloRfUe17fjEZVbf/XXSIh65PNJXNTwbIbDSraRccUVCPG8b
+                      JO4Ed6NGlXJzfjH3L/W1tSrN2FE93hNnbc5lO0btz9Yefj0XRe6E2K0wj1wIy6YZ
+                      ExY6RQILsLiC2l/yad6fKScpiZ89VprcKZ59SYOkWasgXfUyayICgLxmkpmZUS3S
+                      V4NLFCVJKKw7azTZwYKUOeWrylfGv82sderKPhjvjPG8JAJqRj2b231f8/OS65Ti
+                      zwIDAQAB
+                      -----END PUBLIC KEY-----"
 
-        public-key: "{\"keys\":[{\"alg\":\"RS256\",\"e\":\"AQAB\",\"key_ops\":null,\"kid\":\"cdPITDRrf94JoSU6OTI7XvvcQY1H1TpbmrBSpPwhlYk\",\"kty\":\"RSA\",\"n\":\"r2Z3zCOhLzMS1LnrgEJz9mA0k1vVQmDbxM9cy0n3UgBsaQ0RYTvHRcoRFRL_OU0YKP9mLi--qndgt-KG20Yl18_vng-CrZ1Ww4f8yCqSrRQgq0sjt4VK27bCx4Xfco7ZdHV-nXWigu2zL6HsAW4ZYa94tCfkZuYKdDqtXyz5fI5duaKC-IVBjM5Mg-58MAFdJm1N-l3aXOOegqC8XWsX1vG8V-cPs6kElVV_pqq4L1lArJnR8jubJyj45rSJCs9op9pjoGzL2x1MtPmqfP7x9tC4JZlcx8w6CkRvZeET8UvIbIq0_3UHBI8U3NMeHQApBOa9jlbO913_aclBQbaz2w\",\"use\":\"sig\"}]}"
-#        public-key: "ewoia2V5cyI6IFsKewoiYWxnIjogIlJTMjU2IiwKImUiOiAiQVFBQiIsCiJrZXlfb3BzIjogbnVsbCwKImtpZCI6ICJjZFBJVERScmY5NEpvU1U2T1RJN1h2dmNRWTFIMVRwYm1yQlNwUHdobFlrIiwKImt0eSI6ICJSU0EiLAoibiI6ICJyMlozekNPaEx6TVMxTG5yZ0VKejltQTBrMXZWUW1EYnhNOWN5MG4zVWdCc2FRMFJZVHZIUmNvUkZSTF9PVTBZS1A5bUxpLS1xbmRndC1LRzIwWWwxOF92bmctQ3JaMVd3NGY4eUNxU3JSUWdxMHNqdDRWSzI3YkN4NFhmY283WmRIVi1uWFdpZ3Uyekw2SHNBVzRaWWE5NHRDZmtadVlLZERxdFh5ejVmSTVkdWFLQy1JVkJqTTVNZy01OE1BRmRKbTFOLWwzYVhPT2VncUM4WFdzWDF2RzhWLWNQczZrRWxWVl9wcXE0TDFsQXJKblI4anViSnlqNDVyU0pDczlvcDlwam9HekwyeDFNdFBtcWZQN3g5dEM0SlpsY3g4dzZDa1J2WmVFVDhVdkliSXEwXzNVSEJJOFUzTk1lSFFBcEJPYTlqbGJPOTEzX2FjbEJRYmF6MnciLAoidXNlIjogInNpZyIKfQpdCn0="
-#        public-key: "{\"alg\":\"RS256\",\"e\":\"AQAB\",\"key_ops\":null,\"kid\":\"cdPITDRrf94JoSU6OTI7XvvcQY1H1TpbmrBSpPwhlYk\",\"kty\":\"RSA\",\"n\":\"r2Z3zCOhLzMS1LnrgEJz9mA0k1vVQmDbxM9cy0n3UgBsaQ0RYTvHRcoRFRL_OU0YKP9mLi--qndgt-KG20Yl18_vng-CrZ1Ww4f8yCqSrRQgq0sjt4VK27bCx4Xfco7ZdHV-nXWigu2zL6HsAW4ZYa94tCfkZuYKdDqtXyz5fI5duaKC-IVBjM5Mg-58MAFdJm1N-l3aXOOegqC8XWsX1vG8V-cPs6kElVV_pqq4L1lArJnR8jubJyj45rSJCs9op9pjoGzL2x1MtPmqfP7x9tC4JZlcx8w6CkRvZeET8UvIbIq0_3UHBI8U3NMeHQApBOa9jlbO913_aclBQbaz2w\",\"use\":\"sig\"}"
-#        public-key: "ewoiYWxnIjogIlJTMjU2IiwKImUiOiAiQVFBQiIsCiJrZXlfb3BzIjogbnVsbCwKImtpZCI6ICJjZFBJVERScmY5NEpvU1U2T1RJN1h2dmNRWTFIMVRwYm1yQlNwUHdobFlrIiwKImt0eSI6ICJSU0EiLAoibiI6ICJyMlozekNPaEx6TVMxTG5yZ0VKejltQTBrMXZWUW1EYnhNOWN5MG4zVWdCc2FRMFJZVHZIUmNvUkZSTF9PVTBZS1A5bUxpLS1xbmRndC1LRzIwWWwxOF92bmctQ3JaMVd3NGY4eUNxU3JSUWdxMHNqdDRWSzI3YkN4NFhmY283WmRIVi1uWFdpZ3Uyekw2SHNBVzRaWWE5NHRDZmtadVlLZERxdFh5ejVmSTVkdWFLQy1JVkJqTTVNZy01OE1BRmRKbTFOLWwzYVhPT2VncUM4WFdzWDF2RzhWLWNQczZrRWxWVl9wcXE0TDFsQXJKblI4anViSnlqNDVyU0pDczlvcDlwam9HekwyeDFNdFBtcWZQN3g5dEM0SlpsY3g4dzZDa1J2WmVFVDhVdkliSXEwXzNVSEJJOFUzTk1lSFFBcEJPYTlqbGJPOTEzX2FjbEJRYmF6MnciLAoidXNlIjogInNpZyIKfQ=="
+#        public-key: "{\n\"keys\": [\n{\n\"alg\": \"RS256\",\n\"e\": \"AQAB\",\n\"key_ops\": null,\n\"kid\": \"ts2cv5Vjrf51VuLGJ38DVWl23UbowceopzQoV_0v7uM\",\n\"kty\": \"RSA\",\n\"n\": \"2AWirUxwLKDhSjNIc9NS7XqEgNi643qqNwTbcWYNiIFXxbBXOtaDCSemn4TSBcaTFdYUBdhNZeOYeBnZb565ipQXn60X2-zubtb33W3G1uswNn8FqDLDIjPtAC7nryVYIUSukeuggYUrHMBAuGwSqsBsGgL7SfRc74eNg-qi13pN3jeFfukA1f73inOr9IGWASTRSO_ZtUpnC2AjmN8GM-XicuFUduKl3EaeDtptBfKcu4Td9N7jH1PuGgsZ21_VXpwV_jPmTM1pZ5p_oplT9Ub1QWi-8Wvc-y8ZuRmjlks4Mg5m_h0ruYAI1S_3I4cf5zxXVP2hE9_id-0QQZ3mEw\",\n\"use\": \"sig\"\n}\n]\n}"
+#        public-key: "ewoia2V5cyI6IFsKewoiYWxnIjogIlJTMjU2IiwKImUiOiAiQVFBQiIsCiJrZXlfb3BzIjogbnVsbCwKImtpZCI6ICJ0czJjdjVWanJmNTFWdUxHSjM4RFZXbDIzVWJvd2Nlb3B6UW9WXzB2N3VNIiwKImt0eSI6ICJSU0EiLAoibiI6ICIyQVdpclV4d0xLRGhTak5JYzlOUzdYcUVnTmk2NDNxcU53VGJjV1lOaUlGWHhiQlhPdGFEQ1NlbW40VFNCY2FURmRZVUJkaE5aZU9ZZUJuWmI1NjVpcFFYbjYwWDItenVidGIzM1czRzF1c3dObjhGcURMRElqUHRBQzducnlWWUlVU3VrZXVnZ1lVckhNQkF1R3dTcXNCc0dnTDdTZlJjNzRlTmctcWkxM3BOM2plRmZ1a0ExZjczaW5PcjlJR1dBU1RSU09fWnRVcG5DMkFqbU44R00tWGljdUZVZHVLbDNFYWVEdHB0QmZLY3U0VGQ5TjdqSDFQdUdnc1oyMV9WWHB3Vl9qUG1UTTFwWjVwX29wbFQ5VWIxUVdpLThXdmMteThadVJtamxrczRNZzVtX2gwcnVZQUkxU18zSTRjZjV6eFhWUDJoRTlfaWQtMFFRWjNtRXciLAoidXNlIjogInNpZyIKfQpdCn0="
+#        public-key: "{\n  \"alg\": \"RS256\",\n  \"e\": \"AQAB\",\n  \"key_ops\": null,\n  \"kid\": \"ts2cv5Vjrf51VuLGJ38DVWl23UbowceopzQoV_0v7uM\",\n  \"kty\": \"RSA\",\n  \"n\": \"2AWirUxwLKDhSjNIc9NS7XqEgNi643qqNwTbcWYNiIFXxbBXOtaDCSemn4TSBcaTFdYUBdhNZeOYeBnZb565ipQXn60X2-zubtb33W3G1uswNn8FqDLDIjPtAC7nryVYIUSukeuggYUrHMBAuGwSqsBsGgL7SfRc74eNg-qi13pN3jeFfukA1f73inOr9IGWASTRSO_ZtUpnC2AjmN8GM-XicuFUduKl3EaeDtptBfKcu4Td9N7jH1PuGgsZ21_VXpwV_jPmTM1pZ5p_oplT9Ub1QWi-8Wvc-y8ZuRmjlks4Mg5m_h0ruYAI1S_3I4cf5zxXVP2hE9_id-0QQZ3mEw\",\n  \"use\": \"sig\"\n}"
+#        public-key: "ewoiYWxnIjogIlJTMjU2IiwKImUiOiAiQVFBQiIsCiJrZXlfb3BzIjogbnVsbCwKImtpZCI6ICJ0czJjdjVWanJmNTFWdUxHSjM4RFZXbDIzVWJvd2Nlb3B6UW9WXzB2N3VNIiwKImt0eSI6ICJSU0EiLAoibiI6ICIyQVdpclV4d0xLRGhTak5JYzlOUzdYcUVnTmk2NDNxcU53VGJjV1lOaUlGWHhiQlhPdGFEQ1NlbW40VFNCY2FURmRZVUJkaE5aZU9ZZUJuWmI1NjVpcFFYbjYwWDItenVidGIzM1czRzF1c3dObjhGcURMRElqUHRBQzducnlWWUlVU3VrZXVnZ1lVckhNQkF1R3dTcXNCc0dnTDdTZlJjNzRlTmctcWkxM3BOM2plRmZ1a0ExZjczaW5PcjlJR1dBU1RSU09fWnRVcG5DMkFqbU44R00tWGljdUZVZHVLbDNFYWVEdHB0QmZLY3U0VGQ5TjdqSDFQdUdnc1oyMV9WWHB3Vl9qUG1UTTFwWjVwX29wbFQ5VWIxUVdpLThXdmMteThadVJtamxrczRNZzVtX2gwcnVZQUkxU18zSTRjZjV6eFhWUDJoRTlfaWQtMFFRWjNtRXciLAoidXNlIjogInNpZyIKfQ=="
 #        jwks-uri: http://localhost:8089/
         issuer: http://localhost
 
