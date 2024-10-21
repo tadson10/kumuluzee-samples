@@ -33,7 +33,7 @@ The example uses maven to build and run the microservice.
     ```
 2. Start local PostgreSQL DB:
     ```bash
-    docker run -d --name postgres -e POSTGRES_DB=users -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres:latest
+    docker run -d --name postgres -e POSTGRES_DB=users -e POSTGRES_PASSWORD=postgres -e POSTGRES_HOST_AUTH_METHOD=password -p 5432:5432 postgres:latest
     ```
 3. Run the sample:
     * Uber-jar:
